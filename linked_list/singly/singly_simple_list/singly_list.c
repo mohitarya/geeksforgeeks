@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 struct node {
@@ -8,10 +9,13 @@ struct node {
 };
 
 void print_list(struct node *);
+void add_front(struct node **, void *);
 
 int main()
 {
     struct node *node1, *node2, *node3, *head;
+    void *newdata;
+    int size;
 
     node1 = (struct node *) malloc(sizeof(struct node));
     node2 = (struct node *) malloc(sizeof(struct node));
@@ -31,7 +35,12 @@ int main()
     *(int *)(node3->data) = 3;
     node3->next = NULL;
 
+
+    newdata = (int *)malloc(sizeof(int));
+    *(int *)newdata = 0;
+    add_front(&head, newdata);
     print_list(head);
+
     return 0; 
 }
 
@@ -44,4 +53,14 @@ void print_list(struct node *head)
         temp = temp->next;
     }
     printf("\n");
+}
+
+void add_front(struct node **head, void *data)
+{
+    struct node *new_node;
+    new_node = (struct node *)malloc(sizeof(struct node));
+    new_node->data = data;
+
+    new_node->next = *head ;
+    *head = new_node;
 }
