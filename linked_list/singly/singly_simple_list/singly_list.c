@@ -39,7 +39,7 @@ void print_list(struct node *head)
 {
     struct node *temp = head;
     printf("Nodes data in the list:\n\t");
-    while(!temp){
+    while(temp){
         printf("%d\t", *(int *)(temp->data));
         temp = temp->next;
     }
