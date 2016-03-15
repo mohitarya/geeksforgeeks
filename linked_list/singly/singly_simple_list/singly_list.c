@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_list(struct node *);
 
 struct node {
     void *data;
     struct node *next;
 };
+
+void print_list(struct node *);
+
 int main()
 {
     struct node *node1, *node2, *node3, *head;
@@ -36,9 +38,10 @@ int main()
 void print_list(struct node *head)
 {
     struct node *temp = head;
-    print("Nodes data in the list:\n\t");
+    printf("Nodes data in the list:\n\t");
     while(!temp){
-        print("%d\t", *(int *)(temp->data));
+        printf("%d\t", *(int *)(temp->data));
+        temp = temp->next;
     }
     printf("\n");
 }
