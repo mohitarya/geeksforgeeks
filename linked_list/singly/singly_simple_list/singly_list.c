@@ -38,7 +38,13 @@ int main()
 
     newdata = (int *)malloc(sizeof(int));
     *(int *)newdata = 0;
+
     add_front(&head, newdata);
+
+    add_listend(&head, newdata);
+
+    add_in_list(&head, 50, newdata);
+
     print_list(head);
 
     return 0; 
@@ -63,4 +69,51 @@ void add_front(struct node **head, void *data)
 
     new_node->next = *head ;
     *head = new_node;
+}
+
+add_listend(struct node **head, void *data)
+{
+    struct node *temp = *head;
+    struct node *newnode;
+    newnode = (struct node *) malloc(sizeof(struct node));
+    newnode->data = data;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = newnode;
+    newnode->next = NULL;   
+}
+
+add_in_list(struct node **head, int node_no, void *data)
+{
+    //if node number is 0 then add node at the front of the list
+    //if node number is last node or beyond the list then add the node at the last
+    //if node number is elsewhere then add the node after the specified number
+
+    struct node *temp = *head;
+    struct node *newnode;
+    int i=1, flag = 0;
+
+    newnode = (struct node *) malloc(sizeof(struct node));
+    newnode->data = data;
+
+    if (node_no == 0){
+        add_front(head, data);
+    } else {
+        while(i != node_no){
+            if(temp->next == NULL){
+                temp->next = newnode;
+                newnode->next == NULL;
+                flag = 1;
+                break;
+            }else {
+                temp = temp->next;
+                i++;
+            }
+        }
+        if(flag != 1){
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+    }
 }
