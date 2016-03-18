@@ -15,7 +15,7 @@ int main()
 {
     struct node *node1, *node2, *node3, *head;
     void *newdata;
-    int size;
+    int size, key;
 
     node1 = (struct node *) malloc(sizeof(struct node));
     node2 = (struct node *) malloc(sizeof(struct node));
@@ -44,6 +44,12 @@ int main()
     add_listend(&head, newdata);
 
     add_in_list(&head, 50, newdata);
+
+    print_list(head);
+
+    key = 0;
+
+    delete_node(&head, key);
 
     print_list(head);
 
@@ -115,5 +121,33 @@ add_in_list(struct node **head, int node_no, void *data)
             newnode->next = temp->next;
             temp->next = newnode;
         }
+    }
+}
+
+delete_node(struct node **head, int key)
+{
+    struct node *temp = *head, *temp_prev = *head;
+    while(temp){
+        if(*(int *)(temp->data) == key){
+            if(temp == *head){
+                *head = (*head)->next;
+            }else {
+                temp_prev->next = temp->next;
+            }
+            goto free;
+        }else {
+            temp_prev = temp;
+            temp = temp->next;
+        }
+    }
+    printf("Key is not present in the list\n");
+
+free:
+    if(temp){
+        if(temp->data){
+            free(temp->data);
+            temp->data = NULL;
+        }
+        temp->next = NULL;
     }
 }
