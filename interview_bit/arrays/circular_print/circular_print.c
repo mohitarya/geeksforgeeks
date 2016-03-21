@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 void print_arr(int **, int, int);
+void print_arr_circular(int **, int, int);
 
 int main()
 {
@@ -29,6 +30,8 @@ int main()
             *(*(arr + i) + j) = number++;
         }
     }
+    print_arr_circular(arr, rows, columns);
+
     print_arr(arr, rows, columns);
     ret = 0;
 
@@ -54,4 +57,9 @@ void print_arr(int **arr, int rows, int columns)
         }
         printf("\n");
     }
+}
+
+void print_arr_circular(int **arr, int rows, int columns)
+{
+    int     
 }
