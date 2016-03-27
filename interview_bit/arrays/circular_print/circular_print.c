@@ -61,5 +61,24 @@ void print_arr(int **arr, int rows, int columns)
 
 void print_arr_circular(int **arr, int rows, int columns)
 {
-    int     
+    int i = j = 0;
+    //loop when i is constant and j is varying
+    while(columns < rows){
+        while(j < (columns - 1)){
+            print("%d\d", *(*(arr + i) + j));
+            j++;
+        }
+        while(i < (rows - 1)){
+            printf("%d\t", *(*(arr + i) + j));
+            i++;
+        }
+        while(j >= 0){
+            printf("%d\t", *(*(arr + i) + j));
+            j--;
+        }
+        while(i >= 0){
+            printf("%d\t", *(*(arr + i) + j));
+            i--;
+        }
+        
 }
