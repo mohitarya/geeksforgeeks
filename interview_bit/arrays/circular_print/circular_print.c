@@ -61,24 +61,42 @@ void print_arr(int **arr, int rows, int columns)
 
 void print_arr_circular(int **arr, int rows, int columns)
 {
-    int i = j = 0;
+    int i, j;
+    int l_row_up, l_row_down, l_column_left, l_column_right;
+    l_row_up = 0;
+    l_row_down = rows - 1;
+    l_column_left = 0;
+    l_column_right = columns - 1;
     //loop when i is constant and j is varying
-    while(columns < rows){
-        while(j < (columns - 1)){
-            print("%d\d", *(*(arr + i) + j));
+    while(l_column_left <= l_column_right){
+        i = l_row_up;
+        j = l_column_left;
+        printf("i = %d, j = %d, l_row_up = %d, l_row_down = %d, l_column_left = %d, l_column_right = %d\n", i, j, l_row_up, l_row_down, l_column_left, l_column_right);
+        while(j < l_column_right){
+            printf("%d\t", *(*(arr + i) + j));
+            printf("aaaaa\n");
             j++;
         }
-        while(i < (rows - 1)){
+        while(i <  l_row_down){
             printf("%d\t", *(*(arr + i) + j));
+            printf("bbbbb\n");
             i++;
         }
-        while(j >= 0){
+        while(j > l_column_left){
             printf("%d\t", *(*(arr + i) + j));
+            printf("cccc\n");
             j--;
         }
-        while(i >= 0){
+        while(i > l_row_up){
             printf("%d\t", *(*(arr + i) + j));
+            printf("dddd\n");
             i--;
         }
-        
+        l_row_up++;
+        l_row_down--;
+        l_column_left++;
+        l_column_right--;
+        printf("\n");
+    } 
+    printf("\n");
 }
