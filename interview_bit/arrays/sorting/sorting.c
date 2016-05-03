@@ -5,6 +5,11 @@ void insertion_sort(int *, int);
 void merge_sort(int *, int);
 void merge(int *, int, int *, int, int *);
 void print_arr(int *, int);
+void quick_sort(int *, int, int);
+int quick_partition(int *, int, int);
+
+#define SWAP(x, y, z) ((z = x), (x = y), (y = z))
+
 int main()
 {
     int *arr, n, i;
@@ -26,7 +31,8 @@ int main()
     }
     printf("\n");
 //    insertion_sort(arr, n);
-    merge_sort(arr, n);
+//    merge_sort(arr, n);
+    quick_sort(arr, 0, (n - 1));
     printf("Info:: After Sorting array is:\n\t");
     print_arr(arr, n);
     if(arr != NULL){
@@ -121,3 +127,25 @@ void merge(int *L, int Ln, int *R, int Rn, int *arr)
         k++;
     }
 }
+int quick_partition(int *arr, int start, int end)
+{
+    int pivot, pindex = 0, i, temp;
+    pivot = *(arr + end);
+    for(i = 0; i < end; i++){
+        if(*(arr + i) <= pivot){
+            SWAP(*(arr + pindex), *(arr + i), temp);
+            pindex++;
+        }
+    }
+    SWAP(*(arr + pindex), *(arr + end), temp);
+    return pindex;
+}
+void quick_sort(int *arr, int start, int end)
+{
+    int pindex;
+    if(start < end){
+        pindex = quick_partition(arr, start, end);
+        quick_sort(arr, start, (pindex - 1));
+        quick_sort(arr, (pindex + 1), end);
+    }
+}   
