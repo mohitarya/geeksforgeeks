@@ -1,0 +1,98 @@
+Script started on Sun 08 May 2016 01:58:24 AM IST
+]0;root@nfsserver:/home/mohitarya/repo/geeksforgeeks/geeksforgeeks/linux_device_driver/chapter-3/hello_world[?1034h[root@nfsserver hello_world]# strace insmod hello_world.ko
+execve("/usr/sbin/insmod", ["insmod", "hello_world.ko"], [/* 31 vars */]) = 0
+brk(0)                                  = 0x189e000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0a403b0000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=159593, ...}) = 0
+mmap(NULL, 159593, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0a40389000
+close(3)                                = 0
+open("/lib64/liblzma.so.5", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000/\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=153192, ...}) = 0
+mmap(NULL, 2245240, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0a3ff6b000
+mprotect(0x7f0a3ff8f000, 2093056, PROT_NONE) = 0
+mmap(0x7f0a4018e000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x23000) = 0x7f0a4018e000
+close(3)                                = 0
+open("/lib64/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0p!\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=90632, ...}) = 0
+mmap(NULL, 2183688, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0a3fd55000
+mprotect(0x7f0a3fd6a000, 2093056, PROT_NONE) = 0
+mmap(0x7f0a3ff69000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14000) = 0x7f0a3ff69000
+close(3)                                = 0
+open("/lib64/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360*\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=88720, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0a40388000
+mmap(NULL, 2184192, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0a3fb3f000
+mprotect(0x7f0a3fb54000, 2093056, PROT_NONE) = 0
+mmap(0x7f0a3fd53000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x14000) = 0x7f0a3fd53000
+close(3)                                = 0
+open("/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2107816, ...}) = 0
+mmap(NULL, 3932736, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0a3f77e000
+mprotect(0x7f0a3f934000, 2097152, PROT_NONE) = 0
+mmap(0x7f0a3fb34000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1b6000) = 0x7f0a3fb34000
+mmap(0x7f0a3fb3a000, 16960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0a3fb3a000
+close(3)                                = 0
+open("/lib64/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\240l\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=142304, ...}) = 0
+mmap(NULL, 2208864, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0a3f562000
+mprotect(0x7f0a3f578000, 2097152, PROT_NONE) = 0
+mmap(0x7f0a3f778000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x16000) = 0x7f0a3f778000
+mmap(0x7f0a3f77a000, 13408, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0a3f77a000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0a40387000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0a40385000
+arch_prctl(ARCH_SET_FS, 0x7f0a40385740) = 0
+mprotect(0x7f0a3fb34000, 16384, PROT_READ) = 0
+mprotect(0x7f0a3f778000, 4096, PROT_READ) = 0
+mprotect(0x7f0a3fd53000, 4096, PROT_READ) = 0
+mprotect(0x7f0a3ff69000, 4096, PROT_READ) = 0
+mprotect(0x7f0a4018e000, 4096, PROT_READ) = 0
+mprotect(0x622000, 4096, PROT_READ)     = 0
+mprotect(0x7f0a403b1000, 4096, PROT_READ) = 0
+munmap(0x7f0a40389000, 159593)          = 0
+set_tid_address(0x7f0a40385a10)         = 24325
+set_robust_list(0x7f0a40385a20, 24)     = 0
+rt_sigaction(SIGRTMIN, {0x7f0a3f568780, [], SA_RESTORER|SA_SIGINFO, 0x7f0a3f571100}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {0x7f0a3f568810, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x7f0a3f571100}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+brk(0)                                  = 0x189e000
+brk(0x18bf000)                          = 0x18bf000
+brk(0)                                  = 0x18bf000
+uname({sys="Linux", node="nfsserver.example.com", ...}) = 0
+open("/lib/modules/3.10.0-327.10.1.el7.x86_64/modules.softdep", O_RDONLY|O_CLOEXEC) = 3
+fcntl(3, F_GETFL)                       = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+fstat(3, {st_mode=S_IFREG|0644, st_size=89, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0a403af000
+read(3, "# Soft dependencies extracted fr"..., 4096) = 89
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+munmap(0x7f0a403af000, 4096)            = 0
+open("/proc/cmdline", O_RDONLY|O_CLOEXEC) = 3
+read(3, "BOOT_IMAGE=/vmlinuz-3.10.0-327.1"..., 4095) = 186
+read(3, "", 3909)                       = 0
+close(3)                                = 0
+stat(".", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+stat("/home/mohitarya/repo/geeksforgeeks/geeksforgeeks/linux_device_driver/chapter-3/hello_world", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+stat("/home/mohitarya/repo/geeksforgeeks/geeksforgeeks/linux_device_driver/chapter-3/hello_world/hello_world.ko", {st_mode=S_IFREG|0644, st_size=93583, ...}) = 0
+open("/home/mohitarya/repo/geeksforgeeks/geeksforgeeks/linux_device_driver/chapter-3/hello_world/hello_world.ko", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1", 6)               = 6
+lseek(3, 0, SEEK_SET)                   = 0
+fstat(3, {st_mode=S_IFREG|0644, st_size=93583, ...}) = 0
+mmap(NULL, 93583, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0a40399000
+finit_module(0x3, 0x41a15c, 0)          = 0
+munmap(0x7f0a40399000, 93583)           = 0
+close(3)                                = 0
+exit_group(0)                           = ?
++++ exited with 0 +++
+]0;root@nfsserver:/home/mohitarya/repo/geeksforgeeks/geeksforgeeks/linux_device_driver/chapter-3/hello_world[root@nfsserver hello_world]# exit
+exit
+
+Script done on Sun 08 May 2016 01:58:52 AM IST
