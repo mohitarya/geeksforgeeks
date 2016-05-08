@@ -1,0 +1,13 @@
+Basic Make file to build kernel module:
+	obj-m += <filename>.o
+
+	all:
+		make -C /lib/modules/$(shell uname -r)/builds/ M=$(PWD) modules
+	
+	clean:
+		make -C /lib/modules/$(shell uname -r)/builds/ M=$(PWD) modules
+
+if the source file is more then one then following can be add:
+	obj-m += <filename>.o
+	mods-objs := <file1>.o <file2>.o
+
