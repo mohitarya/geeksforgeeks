@@ -12,6 +12,8 @@
 
 int mycdev_open(struct inode *, struct file *);
 static ssize_t mycdev_read(struct file *, char __user *, size_t , loff_t *);
+static ssize_t mycdev_write(struct file *, const char __user *, size_t, loff_t *);
+int mycdev_close(struct inode *, struct file *);
 
 dev_t dev = -1;
 int chrdev_open_counter = 0;
@@ -22,7 +24,9 @@ struct class *mydev_class;
 struct file_operations fops = {
     .owner = THIS_MODULE,
     .open = mycdev_open,
+    .release = mycdev_close,
     .read = mycdev_read,
+    .write = mycdev_write,
 };
 
 static int __init basic_chrdev_init(void)
@@ -88,6 +92,16 @@ int mycdev_open(struct inode *inode, struct file *fp)
     return 0;
 }
 
+int mycdev_close(struct inode *inode, struct file *fp)
+{
+    //Increamenting the counter every time device opened
+    chrdev_open_counter--;
+    printk(KERN_INFO "Device opened count = %d\n", chrdev_open_counter);
+    printk(KERN_INFO "Device Major No = %d, Minor No = %d", MAJOR(dev), MINOR(dev));
+    printk(KERN_INFO "Device closed Successfully\n");
+    return 0;
+}
+
 static ssize_t mycdev_read(struct file *filp, char __user *buff, size_t lbuf, loff_t *ppos)
 {
     char *kbuf;
@@ -99,6 +113,19 @@ static ssize_t mycdev_read(struct file *filp, char __user *buff, size_t lbuf, lo
     nbytes = lbuf - copy_to_user(buff, kbuf + *ppos, lbuf);
     *ppos += nbytes;
     printk("No of bytes read = %zd, pos=%lld\n", nbytes, *ppos);
+    return nbytes;
+}
+
+static ssize_t mycdev_write(struct file *filp, const char __user *buff, size_t lbuf, loff_t *ppos)
+{
+    char *kbuf;
+    int kbuf_size = 100;
+    ssize_t nbytes;
+    kbuf = kmalloc(sizeof(char) * kbuf_size, GFP_KERNEL);
+    memset(kbuf, 0x00, kbuf_size);
+    nbytes = lbuf - copy_from_user(kbuf, buff, lbuf);
+    printk(KERN_INFO "Number of bytes read = %zd", nbytes);
+    printk(KERN_INFO "User data = %s", kbuf);
     return nbytes;
 }
 
