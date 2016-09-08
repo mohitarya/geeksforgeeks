@@ -22,9 +22,11 @@ int main(void)
         scanf("%d", &element);
         insert_list_start(&head, element);
     }
-    insert_node_n_position(&head, 50, 1);
-    insert_node_n_position(&head, 12, 3);
-    insert_node_n_position(&head, 55, 7);
+    //insert_node_n_position(&head, 50, 1);
+    //insert_node_n_position(&head, 12, 3);
+    //insert_node_n_position(&head, 55, 7);
+    delete_node_n_position(&head, 1);
+    delete_node_n_position(&head, 3);
 }
 
 int insert_node_n_position(struct node **head, int element, int position)
@@ -61,6 +63,24 @@ int insert_node_n_position(struct node **head, int element, int position)
     }else
         printf("position %d is out of scope\n", position);
         return -1;
+}
+
+int delete_node_n_position(struct node **head, int position)
+{
+    struct node *temp = *head, *temp1;
+    int i;
+    if(position == 1){
+        *head = temp->next;
+        free(temp);
+    }else{
+        for(i = 1; i < (position - 1); i++){
+            temp = temp->next;
+        }
+        temp1 = temp->next;
+        temp->next = temp1->next;
+        free(temp1);
+    }
+    print_list(*head);
 }
 
 void insert_list_start(struct node **head, int element)
