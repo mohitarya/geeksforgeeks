@@ -1,29 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insert_list_start(int);
-void print_list(void);
 struct node {
     int data;
     struct node *next;
 };
 
-struct node *head;
+void insert_list_start(struct node **, int);
+void print_list(struct node *);
 
 int main(void)
 {
     int n, i;
     int element;
-    head = NULL;
+    struct node *head = NULL;
     printf("Input the number of elements to insert\n");
     scanf("%d", &n);
     for(i = 1; i <= n; i++){
         printf("Input the data to insert\n");
         scanf("%d", &element);
-        insert_list_start(element);
+        insert_list_start(&head, element);
     }
 }
-void insert_list_start(int element)
+void insert_list_start(struct node **head, int element)
 {
     //Create a node
     struct node *temp;
@@ -32,20 +31,18 @@ void insert_list_start(int element)
         printf("Not enough memory to create a node\n");
     }else{
         temp->data = element;
-        temp->next = head;
-        head = temp;
+        temp->next = *head;
+        *head = temp;
     }
-    print_list();
+    print_list(*head);
 }
 
-void print_list(void)
+void print_list(struct node *head)
 {
-    struct node *temp;
-    temp = head;
-    printf("List::\n");
-    while(temp != NULL){
-        printf("%d\t", temp->data);
-        temp = temp->next;
+    printf("List::\t");
+    while(head != NULL){
+        printf("%d\t", head->data);
+        head = head->next;
     }
     printf("\n");
 }
