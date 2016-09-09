@@ -9,6 +9,9 @@ struct node {
 void insert_list_start(struct node **, int);
 void print_list(struct node *);
 int insert_node_n_position(struct node **, int , int );
+void print_list_rec(struct node *);
+void print_list_rec_reverse(struct node *);
+void reverse_list_rec(struct node *, struct node **);
 
 int main(void)
 {
@@ -25,8 +28,64 @@ int main(void)
     //insert_node_n_position(&head, 50, 1);
     //insert_node_n_position(&head, 12, 3);
     //insert_node_n_position(&head, 55, 7);
-    delete_node_n_position(&head, 1);
-    delete_node_n_position(&head, 3);
+    //delete_node_n_position(&head, 1);
+    //delete_node_n_position(&head, 3);
+    //reverse_iterative(&head);
+    //print_list(head);
+    //printf("Print List using recurrsion, LIST:::\t");
+    //print_list_rec(head);
+    //printf("\n");
+    //printf("Print List reverse order using recurrsion, LIST:::\t");
+    //print_list_rec_reverse(head);
+    //printf("\n");
+    reverse_list_rec(head, &head);
+    print_list(head);
+}
+
+void reverse_list_rec(struct node *p, struct node **head)
+{
+    if(p->next == NULL){
+        *head = p;
+        return;
+    }
+    reverse_list_rec(p->next, head);
+    struct node *q = p->next;
+    q->next = p;
+    p->next = NULL;
+}
+
+void print_list_rec(struct node *p)
+{
+    if(p == NULL){
+        return;
+    }
+    printf("%d\t", p->data);
+    print_list_rec(p->next);
+}
+
+void print_list_rec_reverse(struct node *p)
+{
+    if(p == NULL){
+        return;
+    }
+    print_list_rec_reverse(p->next);
+    printf("%d\t", p->data);
+}
+int reverse_iterative(struct node **head)
+{
+    struct node *current, *prev, *next;
+    if(*head == NULL || (*head)->next == NULL){
+        return;
+    }
+    current = *head;
+    prev = NULL;
+    while(current != NULL){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    *head = prev;
 }
 
 int insert_node_n_position(struct node **head, int element, int position)
