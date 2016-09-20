@@ -11,7 +11,7 @@ typedef struct bst_node {
 
 node *insert(node *, int);
 node *create_node(int);
-void print(node *);
+void search_data(node *, int);
 
 // Main Starts from here
 
@@ -22,9 +22,27 @@ int main()
     root = insert(root, 10);
     root = insert(root, 20);
     root = insert(root, 5);
+    search_data(root, 20);
+    search_data(root, 50);
     return 0;
 }
 
+void search_data(node *root, int data)
+{
+    if(root == NULL){
+        printf("Data not found in the tree\n");
+    }
+    else if(root->data == data){
+        printf("Data matched in the tree\n");
+    }
+    else if(data < root->data){
+        search_data(root->left, data);
+    }
+    else{
+        search_data(root->right, data);
+    }
+    return;
+}
 node *create_node(int data)
 {
     node *new_node = (node *) malloc(sizeof(node));
@@ -48,16 +66,11 @@ node *insert(node *root, int data)
         root = new_node;
     }
     // Adding the smaller value Node to the left of sub-tree
-    if(data <= root->data){
+    else if(data <= root->data){
         root->left = insert(root->left, data);
     }
-    if(data > root->data){
+    else if (data > root->data){
         root->right = insert(root->right, data);
     }
     return root;
-}
-
-void print(node *root)
-{
-
 }
