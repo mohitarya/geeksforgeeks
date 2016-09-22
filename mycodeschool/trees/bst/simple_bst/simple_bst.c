@@ -13,25 +13,47 @@ node *insert(node *, int);
 node *create_node(int);
 void search_data(node *, int);
 int find_min(node *);
+int find_max(node *);
+int find_height(node *);
 // Main Starts from here
 
 int main()
 {
-    int min_val, max_val;
+    int min_val, max_val, height = 0;
     node *root = NULL;
     root = insert(root, 15);
     root = insert(root, 10);
     root = insert(root, 20);
     root = insert(root, 5);
+    root = insert(root, 1);
+    root = insert(root, 2);
+    root = insert(root, 18);
+    root = insert(root, 50);
     //search_data(root, 20);
     //search_data(root, 50);
-    min_val = find_min(root);
-    max_val = find_max(root);
-    printf("Min Value in tree is %d\n", min_val);
-    printf("Max value in tree is %d\n", max_val);
+    //min_val = find_min(root);
+    //max_val = find_max(root);
+    //printf("Min Value in tree is %d\n", min_val);
+    //printf("Max value in tree is %d\n", max_val);
+    height = find_height(root);
+    printf("Height of tree is %d\n", height);
     return 0;
 }
 
+int find_height(node *root)
+{
+    int height_left, height_right;
+    if(root == NULL){
+        return -1;
+    }
+    height_left = find_height(root->left);
+    height_right = find_height(root->right);
+    if(height_left <= height_right){
+        return height_right + 1;
+    }else{
+        return height_left + 1;
+    }
+}
 int find_max(node *root)
 {
     if(root->right == NULL){
