@@ -3,6 +3,9 @@
 
 // BST Node Structure 
 
+#define TRUE 1
+#define FALSE 0
+
 typedef struct bst_node {
     int data;
     struct bst_node *left;
@@ -23,6 +26,8 @@ int find_height(node *);
 void print_tree_level_order(node *);
 void push_queue(queue **, queue **, node *);
 queue *create_q_new_node(node *);
+int is_queue_empty(queue *, queue *);
+void pop_queue(queue **, queue **);
 // Main Starts from here
 
 int main()
@@ -45,14 +50,49 @@ int main()
     //printf("Max value in tree is %d\n", max_val);
     //height = find_height(root);
     //printf("Height of tree is %d\n", height);
+    print_tree_level_order(root);
     return 0;
 }
 
 void print_tree_level_order(node *root)
 {
+    node *temp = root;
     queue *front_queue, *rear_queue;
     front_queue = rear_queue = NULL;
-    push_queue(&front_queue, &rear_queue, root);
+    push_queue(&front_queue, &rear_queue, temp);
+    printf("Tree in Level Order::\n");
+    while(!(is_queue_empty(front_queue, rear_queue))){
+        temp = front_queue->pnode;
+        printf("%d\t", front_queue->pnode->data);
+        if(temp->left != NULL){
+            push_queue(&front_queue, &rear_queue, temp->left);
+        }
+        if(temp->right != NULL){
+            push_queue(&front_queue, &rear_queue, temp->right);
+        }
+        pop_queue(&front_queue, &rear_queue);
+    }
+    printf("\n");
+}
+
+void pop_queue(queue **front_queue, queue **rear_queue)
+{
+    queue *temp = *front_queue;
+    if(*front_queue == *rear_queue){
+        *front_queue = *rear_queue = NULL;
+    }else{
+        *front_queue = temp->next;
+    }
+    free(temp);
+}
+
+int is_queue_empty(queue *front_queue, queue *rear_queue)
+{
+    if(front_queue == NULL && rear_queue == NULL){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
 }
 
 queue *create_q_new_node(node *p)
@@ -77,7 +117,7 @@ void push_queue(queue **front_queue, queue **rear_queue, node *pnode)
         *front_queue = new_node;
         *rear_queue = new_node;
     }else{
-        *rear_queue->next = new_node;
+        (*rear_queue)->next = new_node;
         *rear_queue = new_node;
     }
 }
