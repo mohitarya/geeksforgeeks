@@ -28,6 +28,9 @@ void push_queue(queue **, queue **, node *);
 queue *create_q_new_node(node *);
 int is_queue_empty(queue *, queue *);
 void pop_queue(queue **, queue **);
+void inorder_traverse(node *);
+void preorder_traverse(node *);
+void postorder_traverse(node *);
 // Main Starts from here
 
 int main()
@@ -50,8 +53,47 @@ int main()
     //printf("Max value in tree is %d\n", max_val);
     //height = find_height(root);
     //printf("Height of tree is %d\n", height);
-    print_tree_level_order(root);
+    //print_tree_level_order(root);
+    //printf("In order traversal::\n");
+    //inorder_traverse(root);
+    //printf("\n");
+    //printf("Pre order traversal::\n");
+    //preorder_traverse(root);
+    //printf("\n");
+    printf("Post order traversal::\n");
+    postorder_traverse(root);
+    printf("\n");
     return 0;
+}
+
+void inorder_traverse(node *root)
+{
+    if(root == NULL){
+        return;
+    }
+    inorder_traverse(root->left);
+    printf("%d\t", root->data);
+    inorder_traverse(root->right);
+}
+
+void preorder_traverse(node *root)
+{
+    if(root == NULL){
+        return;
+    }
+    printf("%d\t", root->data);
+    preorder_traverse(root->left);
+    preorder_traverse(root->right);
+}
+
+void postorder_traverse(node *root)
+{
+    if(root == NULL){
+        return;
+    }
+    printf("%d\t", root->data);
+    postorder_traverse(root->left);
+    postorder_traverse(root->right);
 }
 
 void print_tree_level_order(node *root)
