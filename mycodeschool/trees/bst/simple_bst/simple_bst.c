@@ -9,12 +9,20 @@ typedef struct bst_node {
     struct bst_node *right;
 } node;
 
+typedef struct queue_node{
+    node *pnode;
+    struct queue_node *next;
+} queue;
+
 node *insert(node *, int);
 node *create_node(int);
 void search_data(node *, int);
 int find_min(node *);
 int find_max(node *);
 int find_height(node *);
+void print_tree_level_order(node *);
+void push_queue(queue **, queue **, node *);
+queue *create_q_new_node(node *);
 // Main Starts from here
 
 int main()
@@ -35,9 +43,43 @@ int main()
     //max_val = find_max(root);
     //printf("Min Value in tree is %d\n", min_val);
     //printf("Max value in tree is %d\n", max_val);
-    height = find_height(root);
-    printf("Height of tree is %d\n", height);
+    //height = find_height(root);
+    //printf("Height of tree is %d\n", height);
     return 0;
+}
+
+void print_tree_level_order(node *root)
+{
+    queue *front_queue, *rear_queue;
+    front_queue = rear_queue = NULL;
+    push_queue(&front_queue, &rear_queue, root);
+}
+
+queue *create_q_new_node(node *p)
+{
+    queue *new_node = NULL;
+    new_node = (queue *) malloc(sizeof(queue));
+    if(new_node == NULL){
+        printf("Unable to allocate memory for queue node\n");
+        return NULL;
+    }
+    new_node->pnode = p;
+    new_node->next = NULL;
+    return new_node;
+}
+
+void push_queue(queue **front_queue, queue **rear_queue, node *pnode)
+{
+    queue *new_node = NULL;
+    // Create a New Node
+    new_node = create_q_new_node(pnode);
+    if(*front_queue == NULL && *rear_queue == NULL){
+        *front_queue = new_node;
+        *rear_queue = new_node;
+    }else{
+        *rear_queue->next = new_node;
+        *rear_queue = new_node;
+    }
 }
 
 int find_height(node *root)
