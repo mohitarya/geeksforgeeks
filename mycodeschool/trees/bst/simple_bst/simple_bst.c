@@ -31,11 +31,15 @@ void pop_queue(queue **, queue **);
 void inorder_traverse(node *);
 void preorder_traverse(node *);
 void postorder_traverse(node *);
+int isTreeBST(node *);
+int is_sub_tree_lesser(node *, int);
+int is_sub_tree_greater(node *, int);
 // Main Starts from here
 
 int main()
 {
     int min_val, max_val, height = 0;
+    int ret_val;
     node *root = NULL;
     root = insert(root, 15);
     root = insert(root, 10);
@@ -60,10 +64,59 @@ int main()
     //printf("Pre order traversal::\n");
     //preorder_traverse(root);
     //printf("\n");
-    printf("Post order traversal::\n");
-    postorder_traverse(root);
-    printf("\n");
+    //printf("Post order traversal::\n");
+    //postorder_traverse(root);
+    //printf("\n");
+    ret_val = isTreeBST(root);
+    if(ret_val == TRUE){
+        printf("Binary tree is a BST\n");
+    }else{
+        printf("Binary tree is not a BST\n");
+    }
     return 0;
+}
+
+int is_sub_tree_lesser(node *root, int data)
+{
+    if(root == NULL){
+        return TRUE;
+    }
+    if(root->data <= data){
+        is_sub_tree_lesser(root->left, data);
+        is_sub_tree_lesser(root->right, data);
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
+int is_sub_tree_greater(node *root, int data)
+{
+    if(root == NULL){
+        return TRUE;
+    }
+    if(root->data > data){
+        is_sub_tree_greater(root->left, data);
+        is_sub_tree_greater(root->right, data);
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
+int isTreeBST(node *root)
+{
+    if(root == NULL){
+        return TRUE;
+    }
+    if(is_sub_tree_lesser(root->left, root->data)
+        && is_sub_tree_greater(root->right, root->data)
+        && isTreeBST(root->left)
+        && isTreeBST(root->right)
+        )
+        return TRUE;
+     else
+        return FALSE;
 }
 
 void inorder_traverse(node *root)
