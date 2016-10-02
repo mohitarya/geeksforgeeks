@@ -75,13 +75,44 @@ int main()
     //}else{
     //    printf("Binary tree is not a BST\n");
     //}
-    ret_val = isTreeBST_eff(root, INT_MIN, INT_MAX);
+    //ret_val = isTreeBST_eff(root, INT_MIN, INT_MAX);
+    //if(ret_val == TRUE){
+    //    printf("Binary tree is a BST\n");
+    //}else{
+    //    printf("Binary tree is not a BST\n");
+    //}
+    ret_val = isTreeBST_eff_inorder(root);
     if(ret_val == TRUE){
         printf("Binary tree is a BST\n");
     }else{
         printf("Binary tree is not a BST\n");
     }
     return 0;
+}
+
+int isTreeBST_eff_inorder(root)
+{
+    int status = FALSE;
+    if(root == NULL){
+        return TRUE;
+    }
+    isTreeBST_eff_inorder(root->left);
+    printf("%d\t", root->data);
+    if(root->left != NULL){
+        if(root->data > root->left->data){
+            status = TRUE;
+        }else{
+            status = FALSE;
+        }
+    }
+    if(root->right != NULL){
+        if(root->data < root->right->data){
+            status = TRUE;
+        }else{
+            status = FALSE
+        }
+    }
+    isTreeBST_eff_inorder(root->right);
 }
 
 int isTreeBST_eff(node *root, int min, int max)
