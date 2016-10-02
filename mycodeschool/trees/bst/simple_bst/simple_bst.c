@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 // BST Node Structure 
 
@@ -34,6 +35,7 @@ void postorder_traverse(node *);
 int isTreeBST(node *);
 int is_sub_tree_lesser(node *, int);
 int is_sub_tree_greater(node *, int);
+int isTreeBST_eff(node *, int, int);
 // Main Starts from here
 
 int main()
@@ -67,13 +69,32 @@ int main()
     //printf("Post order traversal::\n");
     //postorder_traverse(root);
     //printf("\n");
-    ret_val = isTreeBST(root);
+    //ret_val = isTreeBST(root);
+    //if(ret_val == TRUE){
+    //    printf("Binary tree is a BST\n");
+    //}else{
+    //    printf("Binary tree is not a BST\n");
+    //}
+    ret_val = isTreeBST_eff(root, INT_MIN, INT_MAX);
     if(ret_val == TRUE){
         printf("Binary tree is a BST\n");
     }else{
         printf("Binary tree is not a BST\n");
     }
     return 0;
+}
+
+int isTreeBST_eff(node *root, int min, int max)
+{
+    if(root == NULL){
+        return TRUE;
+    }
+    if(root->data > min && root->data < max){
+        isTreeBST_eff(root->left, min, root->data);
+        isTreeBST_eff(root->right, root->data, max);
+        return TRUE;
+    }else
+        return FALSE;
 }
 
 int is_sub_tree_lesser(node *root, int data)
