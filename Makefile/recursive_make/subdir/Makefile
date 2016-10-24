@@ -5,7 +5,7 @@
 all: maindir 
 
 maindir: main.o
-	$(CC) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
 	rm -f *.o maindir

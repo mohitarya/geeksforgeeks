@@ -1,11 +1,14 @@
 # defining variables
 
+CFLAGS = -g
+#export CFLAGS = -g
+
 .PHONEY: all
 
 all: maindir subsystem
 
 maindir: main.o
-	$(CC) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $<
 
 subsystem:
 	$(MAKE) -C subdir all
@@ -13,3 +16,4 @@ subsystem:
 clean:
 	rm -f maindir *.o
 	$(MAKE) -C subdir clean
+	@#+ make -C subdir clean
