@@ -4,4 +4,5 @@
 int temp()
 {
     printf("In temp\n");
+    printf("\n");
 }
