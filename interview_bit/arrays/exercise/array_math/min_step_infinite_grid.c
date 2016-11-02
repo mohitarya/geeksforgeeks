@@ -58,10 +58,10 @@ int chk_xy(int px, int py, int cx, int cy, int *steps)
     int ret;
     //if any of the X and Y cordinate match with the previous cordinate
     if(px == cx){
-        *steps += abs(cy - py);
+        *steps += abs(abs(cy) - abs(py));
         ret = 0;
     } else if (py == cy){
-        *steps += abs(cx - py);
+        *steps += abs(abs(cx) - abs(px));
         ret = 0;
     }else{
         ret = 1;
