@@ -21,7 +21,7 @@ int main()
     printf("Thread ID = %ld\n", thread1);
     pthread_join(thread1, &exit_msg);
     printf("Exit message from thread1 is %s\n", (char *)exit_msg);
-    printf("Changes global msg is %s\n", );
+    printf("Changes global msg is %s\n", msg);
 }
 
 void *thread1_fun(void *msg1)
