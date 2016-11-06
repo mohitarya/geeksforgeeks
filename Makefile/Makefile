@@ -6,6 +6,20 @@
 # $^ - Replace with all prerequisites
 # $< - Replace with first pre-requisites
 
+# testing two types of variables
+
+#x := foo
+#y := $(x) bar
+#x := later
+
+#$(info [$x])
+
+#a = foo
+#b = $(a) bar
+#a = later
+
+#$(info [$a])
+
 OBJECTS = main.o utill.o temp.o
 
 VPATH = vpath_test/test 

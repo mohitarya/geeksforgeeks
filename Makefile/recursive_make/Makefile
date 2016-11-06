@@ -3,6 +3,8 @@
 CFLAGS = -g
 #export CFLAGS = -g
 
+$(info [$(CFLAGS)])
+
 .PHONEY: all
 
 all: maindir subsystem
