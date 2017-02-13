@@ -9,6 +9,22 @@ void print(int *arr, int size)
     printf("\n");
 }
 
+int binary_search_rec(int *arr, int start, int end, int num)
+{
+    int mid;
+    if(end < start){
+        return -1;
+    }
+    mid = (start + end)/2;
+    if(arr[mid] == num){
+        return mid;
+    }else if(arr[mid] > num){
+        return binary_search_rec(arr, start, mid-1, num);
+    }else{
+        return binary_search_rec(arr, mid+1, end, num);
+    }
+}
+
 int binary_search_iter(int *arr, int size, int num)
 {
     int start, end, mid;
@@ -48,6 +64,13 @@ int main()
     printf("Input the element to search:::\t");  
     scanf("%d", &num);
     result = binary_search_iter(arr, size, num);
+    if(result == -1){
+        printf("Array does not contain element::%d\n", num);
+    }else{
+        printf("Array contains the number at index %d\n", result);
+    }
+
+    result = binary_search_rec(arr, 0, size-1, num);
     if(result == -1){
         printf("Array does not contain element::%d\n", num);
     }else{
