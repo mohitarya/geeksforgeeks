@@ -1,3 +1,11 @@
 This is using a static library use the following to compile
 
 gcc element_sum_exist_in_array.c -L/home/mohit/repo/geeksforgeeks/algos/chapter-2/common -lcommon
+
+If using the dynamic Library then run according to the following command
+
+    Export the library path
+       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/lib/
+    
+    Execute the following command to compile 
+        gcc element_sum_exist_in_array.c -lcommon -L/opt/lib

@@ -6,3 +6,12 @@ To create a static lib used the following commands
     # ar command to pack the .o files created in the previous steps
     
         ar -cvq <lib file name e.g. libcommon.a> <Object files>
+   
+To create the dynamic Lib follow the foillowing commands:
+
+
+    gcc -Wall -fPIC -c *.c
+    gcc -shared -Wl,-soname,libcommon.so.1 -o libcommon.so.1.0   *.o
+    mv libcommon.so.1.0 /opt/lib
+    ln -sf /opt/lib/libcommon.so.1.0 /opt/lib/libcommon.so.1
+    ln -sf /opt/lib/libcommon.so.1.0 /opt/lib/libcommon.so
