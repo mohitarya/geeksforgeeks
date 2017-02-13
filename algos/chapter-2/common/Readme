@@ -1,0 +1,8 @@
+To create a static lib used the following commands
+    
+    # Command to create the object files
+        gcc -c <C file names>
+    
+    # ar command to pack the .o files created in the previous steps
+    
+        ar -cvq <lib file name e.g. libcommon.a> <Object files>
