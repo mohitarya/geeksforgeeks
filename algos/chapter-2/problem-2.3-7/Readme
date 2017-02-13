@@ -1,0 +1,3 @@
+This is using a static library use the following to compile
+
+gcc element_sum_exist_in_array.c -L/home/mohit/repo/geeksforgeeks/algos/chapter-2/common -lcommon
