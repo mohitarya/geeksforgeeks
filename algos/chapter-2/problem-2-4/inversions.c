@@ -1,3 +1,9 @@
+/*
+ * Let AOE1 : : n be an array of n distinct numbers. If i < j 
+ * and AOEi > AOEj , then the pair .i; j / is called an inversion of A.
+        a. List the five inversions of the array {2; 3; 8; 6; 1}.
+ * */
+
 #include <stdio.h>
 
 void inverse(int *arr, int size)
