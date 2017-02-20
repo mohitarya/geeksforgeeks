@@ -5,6 +5,37 @@
 
 #define MAX(x, y) ((x >= y)? x : y)
 
+struct result {
+    int i;
+    int j;
+    int sum;
+}result;
+
+struct result *max_subarray_using_kadane_algo(int *arr, int size)
+{
+    struct result *max, *curr_max;
+    int i;
+    max = (struct result *)malloc(sizeof(struct result));
+    curr_max = (struct result *)malloc(sizeof(struct result));
+    max->sum = curr_max->sum = INT_MIN;
+    for(i = 0; i < size; i++){
+        if(curr_max->sum < 0){
+            curr_max->i = i;
+            curr_max->j = i;
+            curr_max->sum = arr[i];
+        }else{
+            curr_max->j = i;
+            curr_max->sum += arr[i];
+        }
+        if(max->sum < curr_max->sum){
+            max->sum = curr_max->sum;
+            max->i = curr_max->i;
+            max->j = curr_max->j;
+        }
+    }
+    return max;
+}
+
 int max_array_from_mid(int *arr, int start, int mid, int end)
 {
     int left, right, i, sum;
@@ -62,8 +93,9 @@ int *max_array_using_brute_force(int *arr, int size)
 }
 int main()
 {
-    int arr[] = {10, -12, 3, 8, -2};
+    int arr[] = {-1, -2, 3, 4, -5, 6};
     int *result, size, result_rec;
+    struct result *res;
     size = sizeof(arr)/sizeof(int);
     result = max_array_using_brute_force(arr, size);
     printf("Input array is ::\n\t\t");
@@ -71,6 +103,9 @@ int main()
     printf("Maximum array sum-%d at start index-%d end index-%d,\n", result[2], result[0], result[1]);
     result_rec = max_subarray_using_recurrsion(arr, 0, (size - 1));
     printf("Max array Sum using recurrsion method= %d\n", result_rec);
+
+    res = max_subarray_using_kadane_algo(arr, size);
+    printf("Max array Sum using kadane's method= %d\n", res->sum);
     return 0;
 }
 
