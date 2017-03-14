@@ -9,7 +9,7 @@ int current_heap_size = -1;
 void make_max_heap(int *heap)
 {
   int root = current_heap_size, temp;
-  while( current_heap_size != 0 ){
+  while( root != 0 ){
     if(root % 2 ){
       if(heap[root] > heap[(root - 1)/2]){
 	SWAP(heap[root], heap[(root - 1)/2], temp);
@@ -48,5 +48,7 @@ int main()
     scanf("%d", &ele);
     put_element(heap, num, ele);
   }
+  printf("Max heap is::\n\t\t");
+  print(heap, num);
   return 0;
 }
