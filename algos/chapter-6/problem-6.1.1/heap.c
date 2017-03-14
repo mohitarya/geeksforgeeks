@@ -6,6 +6,28 @@
 
 int current_heap_size = -1;
 
+void make_min_heap(int *heap)
+{
+  int root = current_heap_size, temp;
+  while( root != 0 ){
+    if(root % 2 ){
+      if(heap[root] < heap[(root - 1)/2]){
+	SWAP(heap[root], heap[(root - 1)/2], temp);
+	root = (root - 1) / 2;
+      }else{
+	break;
+      }
+    }else{
+      if(heap[root] < heap[(root - 2)/2]){
+	SWAP(heap[root], heap[(root - 2)/2], temp);
+	root = (root - 2)/2;
+    }else{
+      break;
+    }
+    }
+  }
+}
+
 void make_max_heap(int *heap)
 {
   int root = current_heap_size, temp;
@@ -32,7 +54,7 @@ void put_element(int *heap, int size, int element)
 {
   heap[++current_heap_size] = element;
   if(current_heap_size != -1){
-    make_max_heap(heap);
+    make_min_heap(heap);
   }
 }
 
