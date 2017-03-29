@@ -5,14 +5,39 @@
 #define ISHEAPFULL(x, y) ((x == (y - 1)) ? 1 : 0)
 #define ROOT(x) ((x % 2) ? ((x / 2)) : ((x / 2) - 1))
 #define SWAP(x, y, z) ((z = x), (x = y), (y = z))
+#define LEFT(x) (((x * 2) + 1))
+#define RIGHT(x) (((x * 2) + 2))
+
+max_heapify(int *heap, int heap_size, int index)
+{
+  int largest, temp;
+  while(RIGHT(index) <= heap_size){
+    if(heap[LEFT(index)] > heap[index]){
+      largest = LEFT(index);
+    }else{
+      largest = index;
+    }
+    if(heap[RIGHT(index)] > heap[largest]){
+      largest = RIGHT(index);
+    }
+    if(index != largest){
+      SWAP(heap[index], heap[largest], temp);
+      index = largest;
+    }else{
+      break;
+    }
+  }
+  return 0;
+}
 
 int heap_increase_key(int *heap, int index, int num)
 {
   int root, child, temp;
-  if(heap[index] < num){
+  if(heap[index] > num){
     printf("Error key is smaller then current key\n");
     return -1;
   }
+  heap[index] = num;
   child = index;
   while(child != 0){
     root = ROOT(child);
@@ -47,7 +72,7 @@ insert(int *heap, int *heap_size, int num)
 
 int main()
 {
-  int choice, heap_size, arr_size, num, quit = 0;
+  int choice, heap_size, arr_size, num, quit = 0, temp, key, value;
   int arr[100];
   heap_size = -1;
   arr_size = 100;
@@ -74,12 +99,41 @@ int main()
       }
       break;
     case 2:
+      printf("The maximum is %d\n", arr[0]);
       break;
     case 3:
+      // Saving the maximum in a temp variable
+      temp = arr[0];
+      arr[0] = arr[heap_size];
+      if(max_heapify(arr, heap_size - 1, 0)){
+	printf("Failed to extract the maximum\n");
+      }else{
+	heap_size--;
+	printf("Maximum is %d\n", temp);
+      }
       break;
     case 4:
+      printf("Input the key::");
+      scanf("%d", &key);
+      printf("Input the value against key %d::", key);
+      scanf("%d", &value);
+      if(key > heap_size){
+	printf("Key %d is greater then current heap size %d\n", key, heap_size);
+	break;
+      }else if(arr[key] >= value){
+	printf("Value %d against key %d, must be greater then cuurent value\n", key, value);
+	break;
+      }
+      if(heap_increase_key(arr, key, value)){
+	printf("Failed to increase the key value\n");
+	break;
+      }
+      printf("New prority Queue is\n");
+      print(arr, heap_size + 1);
       break;
     case 5:
+      printf("The current Queue is:::\n\t\t");
+      print(arr, heap_size + 1);
       break;
     case 6:
       printf("Current Queue is\n");
