@@ -5,6 +5,30 @@
 #include "singly_linked_list.h"
 
 /*
+ * Function: search_node
+ * ..........................
+ * Search a node in list using key match
+ *
+ * head: pointer to head pointer
+ * key: pointer to before node need to add
+ *
+ * return: Pointer to Node if Success
+ *         NULL on error
+ */
+
+Node *search_node(Node *head, void *key)
+{
+  Node *temp = head;
+  while(temp != NULL){
+    if(*((int *)temp->data) == *((int *)key)){
+      return temp;
+    }
+    temp = temp->next;
+  }
+  return NULL;
+}
+
+/*
  * Function: add_before_node
  * ..........................
  * Insert the node before the node when key matches
@@ -148,6 +172,132 @@ Node *create_node(void *data)
 }
 
 /*
+ * Function: del_node_list
+ * ..........................
+ * delete a  node whose key match in the list
+ *
+ *
+ * head: pointer to the head pointer
+ * key: Pointer to the key (type void *)
+ *
+ * return: 0 on success
+ *         Not 0 if Error
+ */
+
+int del_node_list(Node **head, void *key)
+{
+  Node *temp = (*head);
+  Node *prev = NULL;
+  while(temp != NULL){
+    if(*((int *)(temp->data)) == *((int *)key)){
+      if(temp == (*head)){
+	*head = temp->next;
+      }else if(temp->next == NULL){
+	prev->next = NULL;
+      }else{
+	prev->next = temp->next;
+      }
+      break;
+    }
+    prev = temp;
+    temp = temp->next;
+  }
+  if(temp != NULL){
+    free(temp);
+    temp = NULL;
+    return 0;
+  }else{
+    printf("Node with key %d not found\n", *(int *)key);
+    return -1;
+  }
+}
+
+/*
+ * Function: del_node_end
+ * ..........................
+ * delete a  node from the end of a linked list
+ * options available
+ *
+ * head: pointer to the head pointer
+ *
+ * return: 0 on success
+ *         Not 0 if Error
+ */
+int del_node_end(Node **head)
+{
+  Node *temp = (*head);
+  Node *prev = NULL;
+  while(temp->next != NULL){
+    prev = temp;
+    temp = temp->next;
+  }
+  if(temp == (*head)){
+    // There is only one node in the List
+    (*head) = NULL;
+  }else{
+    prev->next = NULL;
+  }
+  free(temp);
+  temp = NULL;
+ }
+
+/*
+ * Function: del_node_front
+ * ..........................
+ * delete a  node from the head of a linked list
+ * options available
+ * 
+ * head: pointer to the head pointer
+ *
+ * return: 0 on success
+ *         Not 0 if Error
+ */
+int del_node_front(Node **head)
+{
+  Node *temp = (*head);
+  (*head) = temp->next;
+  free(temp);
+  temp = NULL;
+  return 0;
+}
+/*
+ * Function: delete
+ * ..........................
+ * delete a  node from the linked list Following are the
+ * options available
+ * - del_front: delete from the from of list
+ * - del_end: delete node from end of list
+ * - del_node: delete a perticular node whose key is given
+ *
+ * return: 0 on success
+ *         Not 0 if Error
+ */
+int delete(Node **head, int option, void *key)
+{
+  int ret;
+  if((*head) == NULL){
+    printf("failed to delete the node, List is empty\n");
+    return -1;
+  }
+  switch(option){
+  case del_front:
+    ret = del_node_front(head);
+    break;
+  case del_end:
+    ret = del_node_end(head);
+    break;
+  case del_node:
+    ret = del_node_list(head, key);
+    break;
+  default:
+    printf("Invalid input\n");
+    ret = -1;
+  }
+  return ret;
+}
+
+
+/*
  * Function: insert
  * ..........................
  * Insert the node to the linked list Following are the
@@ -232,7 +382,7 @@ void print(Node *head)
 
 int main()
 {
-  Node *head = NULL;
+  Node *head = NULL, *node_ptr;
   int *data1, *data2, *data3, *data4, *data5, *data6, *data7;
   data1 = (int *) malloc(sizeof(int));
   data2 = (int *) malloc(sizeof(int));
@@ -259,5 +409,17 @@ int main()
   //insert(&head, after_node, data7, data6);
   insert(&head, before_node, data7, data6);
   print(head);
+  delete(&head, del_front, NULL);
+  delete(&head, del_end, NULL);
+  *data7 = 50;
+  delete(&head, del_node, data7);
+  print(head);
+  *data7 = 25;
+  node_ptr = search_node(head, data7);
+  if(node_ptr == NULL){
+    printf("Failed to find node with key %d\n", *(int *)data7);
+    return -1;
+  }
+  printf("Node find at location %u with key %d\n", node_ptr, *(int *)data7);
   return 0;
 } 

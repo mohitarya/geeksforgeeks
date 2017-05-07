@@ -17,4 +17,10 @@ enum insert {
   point,
 };
 
+enum delete {
+  del_front,
+  del_end,
+  del_node,
+};
+
 #endif
