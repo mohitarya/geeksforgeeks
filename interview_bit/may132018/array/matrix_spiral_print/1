@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+#define COL     3
+
+/* Function Declaration */
+void print_2d_array(int arr[][COL], int rows, int columns);
+
+void print_2d_array(int arr[][COL], int rows, int columns)
+{
+    int i, j;
+    for(i = 0; i < rows; i++)
+    {
+        printf("\t\t");
+        for(j = 0; j < columns; j++)
+        {
+            printf("%d\t", arr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    // Define a 2-D array
+    int arr[][COL] = {{1, 2, 3},{4, 5, 6},{7, 8, 9}};
+    print_2d_array(&arr, 3, 3);
+    return 0;
+}
