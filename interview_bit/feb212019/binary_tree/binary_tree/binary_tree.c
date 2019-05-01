@@ -210,6 +210,41 @@ void level_order_traversal(node *root)
     printf("\n");
 }
 
+void preOrder(node *root)
+{
+    if(root == NULL)
+    {
+        return;
+    }
+    printf("%d\t", root->data);
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+void inOrder(node *root)
+{
+    if(root == NULL)
+    {
+        return;
+    }
+    inOrder(root->left);
+    printf("%d\t", root->data);
+    inOrder(root->right);
+}
+
+void postOrder(node *root)
+{
+    if(root == NULL)
+    {
+        return;
+    }
+    postOrder(root->left);
+    postOrder(root->right);
+    printf("%d\t", root->data);
+}
+
+
+
 int main()
 {
     node *root = NULL;
@@ -229,4 +264,13 @@ int main()
     max_binary_tree(root);
     printf("Height = %d\n", height_tree(root));
     level_order_traversal(root);
+    printf("Pre Order:::\t");
+    preOrder(root);
+    printf("\n");
+    printf("In Order:::\t");
+    inOrder(root);
+    printf("\n");
+    printf("Post Order:::\t");
+    postOrder(root);
+    printf("\n");
 }
